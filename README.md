@@ -40,7 +40,7 @@ The following components have been **modified or extended** to support `gsplat` 
 
  → Replaced all rasterizer calls with `gsplat.rasterization()`.
 
-\- `train.py`  
+\- `train_kmeans.py`  
 
  → Updated training loop to support GSPLaT gradients and `max_radii2D` image-space scaling.  
 

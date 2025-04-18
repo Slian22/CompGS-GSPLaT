@@ -1,0 +1,4 @@
+# ninja log v5
+0	18873	1744214106045348166	/data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/simple_knn.o	40a3a5907b00e801
+0	24531	1744214111711531658	/data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/ext.o	b110366680bedc7
+1	68843	1744214155984962688	/data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/spatial.o	d8f01c8059bb1253

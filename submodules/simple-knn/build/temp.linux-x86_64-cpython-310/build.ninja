@@ -1,0 +1,34 @@
+ninja_required_version = 1.3
+cxx = /usr/bin/g++-11
+nvcc = /usr/local/cuda/bin/nvcc
+
+cflags = -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /data14/liantian.shan.2503/miniconda3/envs/gsplat-env/include -fPIC -O2 -isystem /data14/liantian.shan.2503/miniconda3/envs/gsplat-env/include -fPIC -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include/TH -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include/THC -I/usr/local/cuda/include -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/include/python3.10 -c
+post_cflags = -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1011"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++17
+cuda_cflags = -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include/TH -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/lib/python3.10/site-packages/torch/include/THC -I/usr/local/cuda/include -I/data14/liantian.shan.2503/miniconda3/envs/gsplat-env/include/python3.10 -c
+cuda_post_cflags = -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1011"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_86,code=compute_86 -gencode=arch=compute_86,code=sm_86 -ccbin /usr/bin/gcc-11 -std=c++17
+cuda_dlink_post_cflags = 
+ldflags = 
+
+rule compile
+  command = $cxx -MMD -MF $out.d $cflags -c $in -o $out $post_cflags
+  depfile = $out.d
+  deps = gcc
+
+rule cuda_compile
+  depfile = $out.d
+  deps = gcc
+  command = $nvcc --generate-dependencies-with-compile --dependency-output $out.d $cuda_cflags -c $in -o $out $cuda_post_cflags
+
+
+
+
+
+build /data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/ext.o: compile /data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/ext.cpp
+build /data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/simple_knn.o: cuda_compile /data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/simple_knn.cu
+build /data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/spatial.o: cuda_compile /data14/liantian.shan.2503/SUNDAE/compact3d/gaussian-splatting/submodules/simple-knn/spatial.cu
+
+
+
+
+
+
