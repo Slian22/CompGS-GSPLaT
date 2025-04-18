@@ -1,4 +1,4 @@
-# CompGS-GSPLaT: Compact3D with Nerfstudio's GSPLaT Rasterizer
+# CompGS-GSPLaT: Compact3D with GSPLaT Rasterizer
 
 This repository is a fork of [Compact3D (CompGS)](https://arxiv.org/abs/2311.18159), accepted to ECCV 2024, where the original `diff-gaussian-rasterization` backend has been **fully replaced by [Nerfstudio's GSPLaT rasterizer](https://github.com/nerfstudio-project/gsplat)**.
 
